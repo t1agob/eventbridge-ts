@@ -10,45 +10,45 @@ We will use a Remote Lock scenario where you may have a client app (not included
 
 > If you want more details on that please go to [this](https://github.com/vincedgy/aws-sam-webpack-typescript) project.
 
-### Requirements
+## Requirements
 
 * Visual Studio Code
 * AWS Toolkit to Visual Studio Code
 * SAM CLI
 
-### Steps to run 
+## Steps to run 
 
-**1. Clone the project**
+#### 1. Clone the project
 
 ```bash
 $ mkdir projects && cd projects
 $ git clone https://github.com/t1agob/eventbridge-ts.git eventbridge-ts
 ```
 
-**2. Open Visual Studio Code from root folder**
+#### 2. Open Visual Studio Code from root folder
 
 ```bash
 $ cd eventbridge-ts
 $ code .
 ```
 
-**3. Install the necessary NPM packages**
+#### 3. Install the necessary NPM packages
 
 ```bash
 npm install
 ```
 
-**4. Use webpack to package the source code before publishing SAM Application to AWS**
+#### 4. Use webpack to package the source code before publishing SAM Application to AWS
 
 ```bash
 NODE_ENV=development npm run-script build
 ```
 
-**5. Validate that publishing folder was created**
+#### 5. Validate that publishing folder was created
 
 ![aws-sam-folder](images/aws-sam.png)
 
-**6. Publish SAM Application using AWS Toolkit**
+#### 6. Publish SAM Application using AWS Toolkit
 
 From the command palette select **AWS: Deploy SAM Application**.
 
@@ -74,7 +74,7 @@ Press Enter! This should take a minute or so. Once complete you should see somet
 
 ![aws-sam-successful](images/aws-sam-successful.png)
 
-**7. Test the scenario**
+#### 7. Test the scenario
 
 Open your AWS Console and navigate to API Gateway service. From there you will see your newly published API.
 
@@ -88,7 +88,7 @@ id=10173ab181&action=unlock
 
 You can provide any id of your choice (this represents the lock id) and the supported actions are _lock_ and _unlock_.
 
-**8. Validate that the scenario is working**
+#### 8. Validate that the scenario is working
 
 In order to validate the scenario is working end to end, let's check the cloudwatch logs on the consumer lambda function.
 
