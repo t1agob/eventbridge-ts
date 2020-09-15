@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  eventbridge-ts
+
+  Sample SAM Template for eventbridge-ts
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  ProducerFn:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/producer/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /remoteLock
+            Method: post
+            RequestParameters:
+              - method.request.querystring.action
+              - method.request.querystring.id
+      Policies:
+        - Statement:
+          - Effect: Allow
+            Resource: '*'
+            Action:
+              - events:PutEvents
+  ConsumerFn:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/consumer/
+      Handler: app.lambdaHandler
+      Runtime: nodejs10.x
+      Events:
+        Trigger:
+          Type: CloudWatchEvent 
+          Properties:
+            Pattern:
+              source:
+                - custom.remoteLock
+              detail-type:
+                - lockOperation                
+              # detail:
+              #   action:
+              #     - "lock"
+              #     - "unlock"          
