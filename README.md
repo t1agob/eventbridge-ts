@@ -96,6 +96,7 @@ You should see something similar to this. The output will depend on the paramete
 
 ![aws-api-gateway](images/cloudwatch_log.png)
 
-### Contributions are welcome!
+
+## Contributions are welcome!
 
 If you feel that there is space for improvement in this project or if you find a bug please raise an issue or submit a PR.
