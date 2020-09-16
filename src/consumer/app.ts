@@ -1,7 +1,6 @@
 import { AWSEvent } from "./schema/custom_remotelock/lockoperation/AWSEvent";
 import { LockOperation } from "./schema/custom_remotelock/lockoperation/LockOperation";
 
-// exports.lambdaHandler = (event:AWSLambda.EventBridgeEvent) => {
 exports.lambdaHandler = (event: AWSEvent<LockOperation>) => {
   try {
     var result;
